@@ -1,9 +1,11 @@
+// Exporte une fonction qui retourne une promesse.
 export default function getResponseFromAPI() {
+  // Crée et retourne une nouvelle Promesse.
   return new Promise((resolve, reject) => {
-    // Simuler une opération asynchrone réussie
+    // Simuler un comportement asynchrone, résout la promesse avec un message.
     resolve("Operation réussie");
 
-    // Alternativement, pour simuler une opération asynchrone échouée
+    // Pour simuler une erreur, vous pouvez utiliser `reject` comme ceci :
     // reject(new Error("Échec de l'opération"));
   });
 }
