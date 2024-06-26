@@ -5,6 +5,7 @@
   "main": "0-promise.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node 0-main.js"
   },
   "keywords": [],
   "author": "",
