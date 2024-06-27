@@ -1,22 +1,26 @@
-import Building from './5-building.js';
+// Importation de la classe Building
+import Building from './5-building';
 
-export default class SkyHighBuilding extends
+// Définition de la classe SkyHighBuilding qui étend Building
+export default class SkyHighBuilding extends Building {
+  // Constructeur avec les paramètres sqft et floors
+  constructor(sqft, floors) {
+    super(sqft); // Appel du constructeur de la classe mère avec sqft
+    this._floors = floors; // Initialisation de l'attribut privé _floors
+  }
 
-Building {
-constructor(sqft, floors) {
-super(sqft); // Appel du constructeur de la classe parente Building avec le paramètre sqft
-this._floors = floors;
-}
+  // Getter pour récupérer le nombre d'étages
+  get floors() {
+    return this._floors;
+  }
 
-get sqft() {
-return this._sqft;
-}
+  // Setter pour définir le nombre d'étages
+  set floors(value) {
+    this._floors = value;
+  }
 
-get floors() {
-return this._floors;
-}
-
-evacuationWarningMessage() {
-return Evacuate slowly the ${this._floors} floors;
-}
+  // Méthode pour afficher un message d'évacuation
+  evacuationWarningMessage() {
+    return `Evacuate slowly the ${this._floors} floors`;
+  }
 }
