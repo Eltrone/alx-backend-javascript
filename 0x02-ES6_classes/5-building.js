@@ -2,7 +2,7 @@ import Building from './5-building.js';
 
 export default class SkyHighBuilding extends Building {
   constructor(sqft, floors) {
-    super(sqft); // Appel du constructeur de la classe parente Building avec le paramètre sqft
+    super(sqft);
     this._floors = floors;
   }
 
@@ -23,6 +23,6 @@ export default class SkyHighBuilding extends Building {
 import SkyHighBuilding from './6-sky_high.js';
 
 const building = new SkyHighBuilding(140, 60);
-console.log(building.sqft); // Affiche 140
-console.log(building.floors); // Affiche 60
-console.log(building.evacuationWarningMessage()); // Affiche "Evacuate slowly the 60 floors"
+console.log(building.sqft);
+console.log(building.floors);
+console.log(building.evacuationWarningMessage());
