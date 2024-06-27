@@ -1,10 +1,8 @@
+// 5-building.js
 export default class Building {
   constructor(sqft) {
-    if (new.target === Building) {
-      throw new TypeError('Cannot construct Building instances directly');
-    }
-    if (this.evacuationWarningMessage === Building.prototype.evacuationWarningMessage) {
-      throw new Error('Class extending Building must override evacuationWarningMessage');
+    if (this.constructor === Building) {
+      throw new Error('Building is an abstract class and cannot be instantiated directly.');
     }
     this._sqft = sqft;
   }
@@ -13,8 +11,7 @@ export default class Building {
     return this._sqft;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   evacuationWarningMessage() {
-    throw new Error('Method "evacuationWarningMessage" must be implemented');
+    throw new Error(`${this.constructor.name} must override evacuationWarningMessage`);
   }
 }
