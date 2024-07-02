@@ -1,4 +1,4 @@
-function cleanSet(set, startString) {
+export default function cleanSet(set, startString) {
   if (startString === '') return '';
   const results = [];
   set.forEach(value => {
@@ -8,5 +8,3 @@ function cleanSet(set, startString) {
   });
   return results.join('-');
 }
-
-export default cleanSet;
