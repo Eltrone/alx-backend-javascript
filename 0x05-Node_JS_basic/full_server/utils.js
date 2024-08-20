@@ -1,20 +1,21 @@
-// full_server/utils/utils.js
-import fs from 'fs/promises';
+const fs = require('fs').promises;
 
-export async function readDatabase(path) {
+async function readDatabase(path) {
   try {
-    const data = await fs.readFile(path, { encoding: 'utf8' });
+    const data = await fs.readFile(path, 'utf8');
     const lines = data.split('\n').filter(line => line && !line.startsWith('firstname'));
-
-    const studentInfo = lines.reduce((acc, line) => {
+    const studentsByField = {};
+    lines.forEach(line => {
       const [firstname, , , field] = line.split(',');
-      if (!acc[field]) acc[field] = [];
-      acc[field].push(firstname);
-      return acc;
-    }, {});
-
-    return studentInfo;
+      if (!studentsByField[field]) {
+        studentsByField[field] = [];
+      }
+      studentsByField[field].push(firstname);
+    });
+    return studentsByField;
   } catch (error) {
     throw new Error('Cannot load the database');
   }
 }
+
+export default readDatabase;
