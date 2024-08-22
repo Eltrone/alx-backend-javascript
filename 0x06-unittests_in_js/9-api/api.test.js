@@ -1,30 +1,51 @@
-//api.test.js
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('API server', () => {
-  it('should respond with status code 200 for GET /cart/12 (valid ID)', (done) => {
+describe('API Endpoint Testing', () => {
+  it('should successfully respond with HTTP status 200 when accessing GET /', (done) => {
     chai.request('http://localhost:7865')
-      .get('/cart/12')
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.text).to.contain('Payment methods for cart 12');
+      .get('/')
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
         done();
       });
   });
 
-  it('should respond with status code 404 for GET /cart/hello (invalid ID)', (done) => {
+  it('should return the message "Welcome to the payment system" on GET /', (done) => {
     chai.request('http://localhost:7865')
-      .get('/cart/hello')
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(404);
-        expect(res.text).to.equal('Invalid cart ID');
+      .get('/')
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response.text).to.equal('Welcome to the payment system');
         done();
       });
+  });
+
+  // Suite de tests pour /cart/:id
+  describe('GET /cart/:id', () => {
+    it('should respond with HTTP status 200 for numeric id', (done) => {
+      chai.request('http://localhost:7865')
+        .get('/cart/123')
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(200);
+          expect(response.text).to.equal('Payment methods for cart 123');
+          done();
+        });
+    });
+
+    it('should respond with HTTP status 404 for non-numeric id', (done) => {
+      chai.request('http://localhost:7865')
+        .get('/cart/abc')
+        .end((error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.have.status(404);
+          done();
+        });
+    });
   });
 });
