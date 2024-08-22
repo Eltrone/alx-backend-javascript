@@ -15,5 +15,7 @@ describe('calculateNumber', function() {
     it('should return 6 when input is 1.5 and 3.7', function() {
         assert.strictEqual(calculateNumber(1.5, 3.7), 6);
     });
-    // Ajouter ici d'autres tests si nécessaire
+    it('should return 0 when input is 0 and 0.2', function() {
+        assert.strictEqual(calculateNumber(0, 0.2), 0);
+    });
 });
