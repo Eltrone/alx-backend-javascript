@@ -1,28 +1,19 @@
 // api.test.js
-const chai = require('chai');
-const chaiHttp = require('chai-http');
+// api.test.js updated to use ES Module syntax
+import chai from 'chai';
+import chaiHttp from 'chai-http';
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('API Endpoint Testing', () => {
-  it('should successfully respond with HTTP status 200 when accessing GET /', (done) => {
-    chai.request('http://localhost:7865')
-      .get('/')
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.have.status(200);
-        done();
-      });
+describe('API server', () => {
+  it('should respond with status code 200 (OK) for GET /', async () => {
+    const res = await chai.request('http://localhost:7865').get('/');
+    expect(res).to.have.status(200);
   });
 
-  it('should return the message "Welcome to the payment system" on GET /', (done) => {
-    chai.request('http://localhost:7865')
-      .get('/')
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response.text).to.equal('Welcome to the payment system');
-        done();
-      });
+  it('should respond with "Welcome to the payment system" for GET /', async () => {
+    const res = await chai.request('http://localhost:7865').get('/');
+    expect(res.text).to.equal('Welcome to the payment system');
   });
 });
