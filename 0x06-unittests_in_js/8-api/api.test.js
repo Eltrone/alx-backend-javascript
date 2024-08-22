@@ -1,26 +1,28 @@
 // api.test.js
 const chai = require('chai');
-const request = require('request');
+const chaiHttp = require('chai-http');
 const expect = chai.expect;
-const server = require('./api'); // Import server for testing
 
-describe('Index page', function() {
-    // Ensure that server is closed after tests are finished
-    after(function() {
-        server.close();
-    });
+chai.use(chaiHttp);
 
-    it('should return status code 200 for GET /', function(done) {
-        request.get('http://localhost:7865', function(error, response, body) {
-            expect(response.statusCode).to.equal(200);
-            done();
-        });
-    });
+describe('API Endpoint Testing', () => {
+  it('should successfully respond with HTTP status 200 when accessing GET /', (done) => {
+    chai.request('http://localhost:7865')
+      .get('/')
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        done();
+      });
+  });
 
-    it('should return correct message for GET /', function(done) {
-        request.get('http://localhost:7865', function(error, response, body) {
-            expect(body).to.equal('Welcome to the payment system');
-            done();
-        });
-    });
+  it('should return the message "Welcome to the payment system" on GET /', (done) => {
+    chai.request('http://localhost:7865')
+      .get('/')
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response.text).to.equal('Welcome to the payment system');
+        done();
+      });
+  });
 });
